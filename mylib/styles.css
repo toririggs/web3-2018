@@ -1,0 +1,54 @@
+body {
+	background-color: #434d56;
+	color: LightGray;
+	text-decoration: none;
+}
+a {
+	text-decoration: none;
+	color: LightGray;
+}
+a:hover {
+	color: black;
+}
+table, td, th{
+	border: 1px solid black;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+th {
+	font-size: 40px;
+	background-color: 22262b;
+}
+td { 
+	font-size: 25px;
+	padding: 2px 5px;
+}
+td:hover {
+	background-color: 00004d;
+}
+tr:nth-child(even) {
+	background-color: #70818f;
+}
+tr:hover {
+        background-color: black;
+}
+form {
+	width: 65%;
+	margin: auto;
+	text-align: center;
+	font-size: 40px;
+}
+input {
+	height: 40px;
+	background-color: #434d56;
+	color: WhiteSmoke;
+	
+}
+input:hover {
+	background-color: black;
+}
+h2 {
+	text-align: center;
+}
