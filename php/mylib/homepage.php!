@@ -1,0 +1,46 @@
+<?php
+
+class Gen {
+  function generate() {
+ }
+}
+
+class Page extends Gen {
+ function doctype() {
+  echo "<!DOCTYPE html>\n";
+  $this->html();
+  }
+ function html() {
+  echo "<html>\n";
+  $this->header();
+  $this->body();
+  echo "</html>\n";
+  }
+ function header() {
+  echo "<head>\n";
+  $this->title();
+  $this->css();
+  $this->js();
+  echo "</head>\n";
+  }
+ function title() {
+  echo "<title> This is the title </title>\n";
+  }
+ function css() {
+  echo "<link rel= 'stylesheet' href= 'styles.css'>\n";
+  }
+ function js() {
+  echo "<script src='script.js'></script>\n";
+  }
+ function body() {
+  echo "<body>\n Here's the body\n </body>\n";
+  }
+ function generate() {
+  $this->doctype();
+ }
+}
+
+$page = new Page();
+$page->generate();
+
+?>
