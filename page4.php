@@ -13,17 +13,18 @@ $r = $mysqli->query("SELECT * FROM u");
 $s = $r->fetch_assoc();
 if ('Y' == $s['active']) {
 
-$mysqli->query("USE $database;");
+$mysqli->close();
+$newsqli = mysqli_connect("localhost", $u, $p, $database);
 if(isset($_POST['add'])) {
-	additemgamecube($_POST["name"], $_POST["release"], $_POST["pub"], $_POST["dev"], $_POST["own"], $_POST["rating"], $mysqli);
+	additemgamecube($_POST["name"], $_POST["release"], $_POST["pub"], $_POST["dev"], $_POST["own"], $_POST["rating"], $newsqli);
 }
 if(isset($_POST['delete'])) {
-	deleteitemgamecube($_POST["cols"], $_POST["val"], $mysqli);
+	deleteitemgamecube($_POST["cols"], $_POST["val"], $newsqli);
 }
 basicsetup("GameCube");
 
 $query2="SELECT * FROM GameCube";
-$result=$mysqli->query($query2);
+$result=$newsqli->query($query2);
 $num=$result->num_rows;
 if ($num > 0) {
 	echo "<table><tr><th>Name</th><th>Release Date</th><th>Publisher</th><th>Developer</th><th>Own</th><th>ESRB Rating</th></tr>";
@@ -52,6 +53,6 @@ echo "<input type='submit' name='delete' value='Delete'></form>";
 	header("location: index.php");
 }
 
-$mysqli->close();
+$newsqli->close();
 echo "</body></html>";
 ?>

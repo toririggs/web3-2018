@@ -12,7 +12,10 @@ echo "Password: <input type='password' name='password'><br><br>";
 echo "<input type='submit'></form>";
 
 $str=$_GET['id'];
-if ($str=="N") {echo "<p style='text-align:center'>Login information incorrect.</p>"; }
+if ($str=="N") {
+echo "<p style='text-align:center'>Login information incorrect.</p>"; 
+assignno();
+}
 
 echo "</body></html>";
 ?>

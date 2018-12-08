@@ -6,7 +6,6 @@ $database="Collectibles";
 
 basicsetup("Animal Crossing Amiibo");
 
-
 $mysqli = mysqli_connect("localhost", $u, $p, $database);
 if(!$mysqli) {
 	die("Connection failed: " . mysqli_connect_error());
@@ -16,17 +15,17 @@ $r = $mysqli->query("SELECT * FROM u");
 $s = $r->fetch_assoc();
 if ('Y' == $s['active']) {
 
-$mysqli->query("USE $database;");
+$mysqli->close();
+$newsqli= mysqli_connect("localhost", $u, $p, $database);
 if(isset($_POST['add'])) {
-	additemacamiibo($_POST["name"], $_POST["amiibo_type"], $_POST["series_num"], $_POST["card_num"], $_POST["own"], $mysqli);
+	additemacamiibo($_POST["name"], $_POST["amiibo_type"], $_POST["series_num"], $_POST["card_num"], $_POST["own"], $newsqli);
 }
 if(isset($_POST['delete'])) {
-	deleteitemacamiibo($_POST["cols"], $_POST["val"], $mysqli);
+	deleteitemacamiibo($_POST["cols"], $_POST["val"], $newsqli);
 }
 
-
 $query2="SELECT * FROM Animal_Crossing_Amiibo";
-$result=$mysqli->query($query2);
+$result=$newsqli->query($query2);
 $num=$result->num_rows;
 if ($num > 0) {
 	echo "<table><tr><th>Name</th><th>Amiibo Type</th><th>Series Number</th><th>Card Number</th><th>Own</th></tr>";
@@ -53,6 +52,6 @@ echo "<input type='submit' name='delete' value='Delete'></form>";
 	header("location: index.php");
 }
 
-$mysqli->close();
+$newsqli->close();
 echo "</body></html>";
 ?>

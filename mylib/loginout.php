@@ -47,6 +47,7 @@ function basicsetup($title){
 function additemgamecube($name, $release, $pub, $dev, $own, $rating, $mysqli){
 	$q="INSERT INTO `GameCube` (`id`, `name`, `release_date`, `publisher`, `developer`, `have`, `ESRB_rating`) VALUES (NULL, '" . $name . "', '" . $release . "', '" . $pub . "', '" . $dev . "', '" . $own . "', '" . $rating . "');";
 	$mysqli->query($q);
+	echo $name;
 }
 
 function deleteitemgamecube($radio, $name, $mysqli){
@@ -59,4 +60,15 @@ function deleteitemacamiibo($radio, $name, $mysqli){
 	$mysqli->query($q);
 }
 
+function assignno(){
+	$readuser = fopen("/var/www/html/mylib/mysqlusers.txt", "r") or die("Unable to open file");
+	$rootu = trim(fgets($readuser));
+	$rootp = trim(fgets($readuser));
+	$mysqli=new mysqli("localhost", $rootu, $rootp);
+	$mysqli->query("USE users;");
+	$mysqli->query("UPDATE `u` SET `active` = 'N' WHERE `u`.`username`='riggs';");
+	$r=$mysqli->query("SELECT * FROM u");
+	$s=$r->fetch_assoc();
+	$mysqli->close();
+}
 ?>
